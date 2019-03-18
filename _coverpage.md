@@ -8,7 +8,7 @@
 
 - Using TypeScript and Nest.js
 - Writing Node MicroService Easily
-- Based on Consul
+- Based On Consul
 
 [GitHub](https://github.com/nest-cloud)
 [Get Started](#/zh-cn/nest)

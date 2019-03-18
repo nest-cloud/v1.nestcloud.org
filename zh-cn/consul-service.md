@@ -72,7 +72,54 @@ export class TestService {
 
 ## 检查策略
 
-推荐使用 @nestjs/terminus 模块
+### Script + Interval
+
+```yaml
+consul:
+  healthCheck:
+    timeout: 1s
+    interval: 10s
+    script: /root/script/check.sh
+```
+
+### Http + Interval
+
+```yaml
+consul:
+  healthCheck:
+    timeout: 1s
+    interval: 10s
+    protocol: http
+    route: /health
+```
+
+推荐使用 [@nestjs/terminus](https://github.com/nestjs/terminus) 模块
+
+### Tcp + Interval
+
+```yaml
+consul:
+  healthCheck:
+    timeout: 1s
+    interval: 10s
+    tcp: localhost:3000
+```
+
+### Time To Live
+
+```yaml
+consul:
+  healthCheck:
+    ttl: 60s
+```
+
+### Docker + Interval
+
+```yaml
+consul:
+  healthCheck:
+    dockerContainerId: 2ddd99fd268c
+```
 
 ## API 文档
 
@@ -94,8 +141,16 @@ export class TestService {
 | options.consul.healthCheck.route | string | 健康检查 URL，默认 /health |
 | options.consul.healthCheck.protocol | string | 健康检查 URL 协议，默认 http |
 | options.consul.healthCheck.deregisterCriticalServiceAfter | string | 在指定时间之后移除不健康服务 |
+| options.consul.healthCheck.tcp | string | host:port |
+| options.consul.healthCheck.script | string | 执行脚本进行健康检查 |
+| options.consul.healthCheck.dockerContainerId | string | 根据 docker container id 进行健健康检查 |
+| options.consul.healthCheck.shell | string | 容器中脚本路径 |
+| options.consul.healthCheck.ttl | string | time to live |
+| options.consul.healthCheck.notes | string | check 描述 |
+| options.consul.healthCheck.status | string | 服务初始状态 |
 | options.consul.maxRetry | number | 服务注册或者取消注册失败重试次数 |
 | options.consul.retryInterval | number | 服务注册或者取消注册额失败重试间隔 |
+
 
 ## API 文档
 

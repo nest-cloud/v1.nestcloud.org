@@ -87,15 +87,16 @@ export class TestService {
 import { Module } from '@nestjs/common';
 import { TypeormLogger } from '@nestcloud/logger';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { NEST_TYPEORM_LOGGER_PROVIDER } from '@nestcloud/common';
 
 @Module({
   imports: [
       TypeOrmModule.forRootAsync({
-          useFactory: () => ({
+          useFactory: (logger: TypeormLogger) => ({
               /* ... */
-              logger: new TypeormLogger(),
+              logger,
           }),
-          inject: [],
+          inject: [NEST_TYPEORM_LOGGER_PROVIDER],
       })
   ],
 })

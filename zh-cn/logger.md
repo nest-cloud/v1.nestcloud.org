@@ -6,23 +6,22 @@ Logger 提供日志功能，基于 winston@2 实现。
 
 ```bash
 npm install @nestcloud/logger --save
+npm install @types/winton --save-dev
 ```
 
-## 注册模块
+## 使用
 
 ```typescript
-import { Module } from '@nestjs/common';
-import { LoggerModule, Logger } from '@nestcloud/logger';
+import { NestFactory } from '@nestjs/core'
+import { Injectable } from '@nestjs/core';
+import { NestLogger, Logger } from '@nestcloud/logger';
+import { AppModule } from './app.module';
 
-Logger.contextPath = __dirname;
-Logger.filename = 'logger.yml';
-
-@Module({
-  imports: [
-      LoggerModule.register()
-  ],
-})
-export class ApplicationModule {}
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule, { 
+      logger: new NestLogger({path: __dirname, filename: 'logger.yml'})
+  });
+}
 ```
 
 ## 配置
@@ -53,7 +52,19 @@ logger:
       maxFiles: 14d
 ```
 
-## 使用
+## 注入 logger
+
+```typescript
+import { Module } from '@nestjs/common';
+import { LoggerModule, Logger } from '@nestcloud/logger';
+
+@Module({
+  imports: [
+      LoggerModule.register()
+  ],
+})
+export class ApplicationModule {}
+```
 
 ```typescript
 import { Injectable } from '@nestjs/common';
@@ -67,24 +78,6 @@ export class TestService {
   log() {
       this.logger.info('The first log');
   }
-}
-```
-
-## 自定义 NestJS 日志
-
-```typescript
-import { NestFactory } from '@nestjs/core'
-import { Injectable } from '@nestjs/core';
-import { NestLogger, Logger } from '@nestcloud/logger';
-import { AppModule } from './app.module';
-
-Logger.contextPath = __dirname;
-Logger.filename = 'logger.yml';
-
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { 
-      logger: new NestLogger()
-  });
 }
 ```
 

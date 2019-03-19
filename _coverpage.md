@@ -11,7 +11,7 @@
 - Based On Consul
 
 [GitHub](https://github.com/nest-cloud)
-[Get Started](/#/zh-cn/nest)
+[Get Started](/zh-cn/nest.md)
 
 <!-- background color -->
 

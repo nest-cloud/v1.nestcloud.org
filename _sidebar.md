@@ -2,7 +2,8 @@
   - [如何使用NestCloud](zh-cn/nest.md)
   
 - 指南
-
+  
+  - [部署 Consul](zh-cn/deploy-consul.md)
   - [使用 Starter 快速开始](zh-cn/quickstart.md)
   - [Boot完整配置](zh-cn/config.md)
 
